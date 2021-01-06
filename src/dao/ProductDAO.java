@@ -13,6 +13,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import model.ItemInfo;
 import model.Product;
 
 public class ProductDAO {
@@ -24,6 +25,46 @@ public class ProductDAO {
 	private final String DB_USER = "hamadatomoki";
 	private final String DB_PASS = "argon3-3";
 
+
+
+	public void register(ItemInfo iteminfo) {
+		String name = iteminfo.getName();
+		String explain = iteminfo.getExplain();
+		String condition = iteminfo.getCondition();
+		int price = iteminfo.getPrice();
+		String category = iteminfo.getCategory();
+		String img = iteminfo.getImg();
+		String ext = iteminfo.getExt();
+		String fee = iteminfo.getFee();
+		String location = iteminfo.getLocation();
+		String day = iteminfo.getDay();
+
+		// DB接続
+		try (Connection conn = DriverManager.getConnection(JDBC_URL, DB_USER, DB_PASS)) {
+			// SELECT文作成
+			String sql = "INSERT INTO product(id,name,explain,condition,price,category,img,ext,spg_fee,spg_loc,spg_day)VALUES(myseq.NEXTVAL,?,?,?,?,?,?,?,?,?,?)";
+			// 事前にコンパイルし、プリペアドステートメントに変換
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+			pStmt.setString(1, name);
+			pStmt.setString(2, explain);
+			pStmt.setString(3, condition);
+			pStmt.setInt(4, price);
+			pStmt.setString(5, category);
+			pStmt.setString(6, img);
+			pStmt.setString(7, ext);
+			pStmt.setString(8, fee);
+			pStmt.setString(9, location);
+			pStmt.setString(10, day);
+
+			// SQLを実行
+			pStmt.executeUpdate();
+
+		} catch (SQLException e) {
+			// 例外処理
+			e.printStackTrace();
+		}
+	}
+
 	public List<List<Product>> search(String pattern) {
 
 		List<List<Product>> prdList = new ArrayList<>();
@@ -31,7 +72,7 @@ public class ProductDAO {
 		try (Connection conn = DriverManager.getConnection(JDBC_URL, DB_USER, DB_PASS)) {
 
 			// SELECT文作成
-			String sql = "SELECT name, price, category, img, ext FROM product WHERE name LIKE ? OR category LIKE ?";
+			String sql = "SELECT name, explain, condition, price, category, img, ext, spg_fee, spg_loc, spg_day FROM product WHERE name LIKE ? OR category LIKE ?";
 
 			// 事前にコンパイルし、プリペアドステートメントに変換
 			PreparedStatement pStmt = conn.prepareStatement(sql);
@@ -44,13 +85,17 @@ public class ProductDAO {
 			while (rs.next()) {
 				// クエリ結果から値を取得
 				String name = rs.getString("name");
+				String explain = rs.getString("explain");
 				int price = rs.getInt("price");
 				String category = rs.getString("category");
+				String condition = rs.getString("condition");
 				String img = rs.getString("img");
 				String ext = rs.getString("ext");
+				String fee = rs.getString("spg_fee");
+				String location = rs.getString("spg_loc");
+				String day = rs.getString("spg_day");
 				// インスタンスに取得した値を設定
-				Product product = new Product(name, price, category, img, ext);
-				System.out.println(name + "　|　" + price + "　|　" + name + "　|　" + category + "　|　" + ext);
+				Product product = new Product(name, explain, price, category, condition, img, ext, fee, location, day);
 
 				// カラム1~３の配列に格納
 				prd.add(product);
@@ -81,7 +126,7 @@ public class ProductDAO {
 		// DB接続
 		try (Connection conn = DriverManager.getConnection(JDBC_URL, DB_USER, DB_PASS)) {
 			// SELECT文作成
-			String sql = "SELECT name, price, category, img, ext FROM product WHERE category = ?";
+			String sql = "SELECT name, explain, condition, price, category, img, ext, spg_fee, spg_loc, spg_day FROM product WHERE category = ?";
 
 			// 事前にコンパイルし、プリペアドステートメントに変換
 			PreparedStatement pStmt = conn.prepareStatement(sql);
@@ -93,12 +138,17 @@ public class ProductDAO {
 			while (rs.next()) {
 				// クエリ結果から値を取得
 				String name = rs.getString("name");
+				String explain = rs.getString("explain");
 				int price = rs.getInt("price");
 				String category = rs.getString("category");
+				String condition = rs.getString("condition");
 				String img = rs.getString("img");
 				String ext = rs.getString("ext");
+				String fee = rs.getString("spg_fee");
+				String location = rs.getString("spg_loc");
+				String day = rs.getString("spg_day");
 				// インスタンスに取得した値を設定
-				Product product = new Product(name, price, category, img, ext);
+				Product product = new Product(name, explain, price, category, condition, img, ext, fee, location, day);
 				// System.out.println(name + "　|　" + price + "　|　" + name + "　|　" + category + "　|　" + ext);
 
 				// カラム1~３の配列に格納
@@ -131,7 +181,7 @@ public class ProductDAO {
 		// DB接続
 		try (Connection conn = DriverManager.getConnection(JDBC_URL, DB_USER, DB_PASS)) {
 			// SELECT文作成
-			String sql = "SELECT name, price, category, img, ext FROM product";
+			String sql = "SELECT name, explain, condition, price, category, img, ext, spg_fee, spg_loc, spg_day FROM product";
 
 			// 事前にコンパイルし、プリペアドステートメントに変換
 			PreparedStatement pStmt = conn.prepareStatement(sql);
@@ -142,12 +192,17 @@ public class ProductDAO {
 			while (rs.next()) {
 				// クエリ結果から値を取得
 				String name = rs.getString("name");
+				String explain = rs.getString("explain");
 				int price = rs.getInt("price");
 				String category = rs.getString("category");
+				String condition = rs.getString("condition");
 				String img = rs.getString("img");
 				String ext = rs.getString("ext");
+				String fee = rs.getString("spg_fee");
+				String location = rs.getString("spg_loc");
+				String day = rs.getString("spg_day");
 				// インスタンスに取得した値を設定
-				Product product = new Product(name, price, category, img, ext);
+				Product product = new Product(name, explain, price, category, condition, img, ext, fee, location, day);
 				// System.out.println(name + "　|　" + price + "　|　" + name + "　|　" + category + "　|　" + ext);
 
 				// カラム1~３の配列に格納

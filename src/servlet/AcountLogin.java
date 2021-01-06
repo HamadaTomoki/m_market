@@ -40,7 +40,7 @@ public class AcountLogin extends HttpServlet {
 			session.setAttribute("acountLoginInfo", ali);
 
 			// ログイン済みTopページへフォワード
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/mypage.jsp");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/index.jsp");
 			dispatcher.forward(request, response);
 
 		} else {

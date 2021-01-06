@@ -18,18 +18,16 @@
 </head>
 <body>
 	<jsp:include page="/WEB-INF/jsp/header.jsp" />
-	<form name="drag_and_drop" action="" method="post"
-		enctype="multipart/form-data">
-
-		<div class="rectagle-shadow2">
+	<div class="rectagle-shadow2">
+		<form action="/m_market/ItemSell" enctype="multipart/form-data"
+			method="POST" id="formElem" name="drag_and_drop">
 			<p class="fb-tag">出品画像</p>
 			<p class="mt-3 mb-3">１枚のみアップロードできます</p>
-			<div id="ddarea" class="drop_area mb-5">
-				<input type="file" style="display: none;" value=""> <i
+			<div id="ddarea" class="drop_area mb-5" onclick="mouseClick()">
+				<input type="file" style="display: none;" id="fileInput"
+					name="fileInput"> <i id="myicon"
 					class="mt-5 mb-3 fas fa-camera fa-2x" style="color: black"></i>
-				<p class="mb-5" style="font-size: 11px">
-					ドラッグアンドドロップ<br>またはクリックしてファイルをアップロード
-				</p>
+				<p id="mytext" class="mb-5" style="font-size: 13px">クリックしてファイルをアップロード!</p>
 			</div>
 
 			<hr>
@@ -57,20 +55,20 @@
 				<p>商品の詳細</p>
 				<div>
 					<p class="fb-tag mt-5 mb-3">カテゴリー</p>
-					<select name="category" class="custom-select select-widthmax">
+					<select name="prd_category" class="custom-select select-widthmax">
 						<option selected>選択してください</option>
-						<option value="1">家電</option>
-						<option value="2">パソコン</option>
+						<option value="家電">家電</option>
+						<option value="パソコン">パソコン</option>
 					</select>
 					<p class="fb-tag mt-5 mb-3">商品の状態</p>
-					<select name="condition" class="custom-select select-widthmax">
+					<select name="prd_condition" class="custom-select select-widthmax">
 						<option selected>選択してください</option>
-						<option value="1">新品・未使用</option>
-						<option value="2">未使用に近い</option>
-						<option value="3">目立った傷や汚れなし</option>
-						<option value="4">やや傷や汚れあり</option>
-						<option value="5">傷や汚れあり</option>
-						<option value="6">全体的に状態が悪い</option>
+						<option value="新品・未使用">新品・未使用</option>
+						<option value="未使用に近い">未使用に近い</option>
+						<option value="目立った傷や汚れなし">目立った傷や汚れなし</option>
+						<option value="やや傷や汚れあり">やや傷や汚れあり</option>
+						<option value="傷や汚れあり">傷や汚れあり</option>
+						<option value="全体的に状態が悪い">全体的に状態が悪い</option>
 					</select>
 				</div>
 			</div>
@@ -83,8 +81,8 @@
 					<p class="fb-tag mt-5 mb-3">発送料の負担</p>
 					<select name="spg_fee" class="custom-select select-widthmax">
 						<option selected>選択してください</option>
-						<option value="1">送料込み（出品者負担）</option>
-						<option value="2">着払い（購入者負担）</option>
+						<option value="送料込み（出品者負担）">送料込み（出品者負担）</option>
+						<option value="着払い（購入者負担）">着払い（購入者負担）</option>
 					</select>
 					<p class="fb-tag mt-5 mb-3">発送元の地域</p>
 					<select name="spg_location" class="custom-select select-widthmax">
@@ -140,9 +138,9 @@
 					<p class="fb-tag mt-5 mb-3">発送までの日数</p>
 					<select name="spg_day" class="custom-select select-widthmax">
 						<option selected>選択してください</option>
-						<option value="">1 ~ 2日で発送</option>
-						<option value="">2 ~ 3日で発送</option>
-						<option value="">4 ~ 7日で発送</option>
+						<option value="1 ~ 2日で発送">1 ~ 2日で発送</option>
+						<option value="2 ~ 3日で発送">2 ~ 3日で発送</option>
+						<option value="4 ~ 7日で発送">4 ~ 7日で発送</option>
 					</select>
 				</div>
 			</div>
@@ -154,20 +152,56 @@
 				<div class="price-flex mt-4">
 					<p class="fb-tag">販売価格</p>
 					<p class="mt-3 ">
-						¥　<input type="text" name="prd_price" placeholder="0"
+						¥ <input type="text" name="prd_price" placeholder="0"
 							maxlength="7">
 					</p>
 				</div>
 			</div>
-
-			<div class="btn-center">
-				<button class="btn btn-danger mt-5 fb-tag btn-conf">出品する</button>
+			<div class="popup" id="js-popup">
+				<div class="popup-inner">
+					<div class="close-btn" id="js-close-btn">
+						<i class="fas fa-times"></i>
+					</div>
+					<img src="images/mdl_sell.jpg">
+					<p>出品する前に今１度, 出品内容をご確認ください!</p>
+					<button type="submit" class="btn btn-danger mt-5 fb-tag btn-conf">出品内容を確定する</button>
+				</div>
+				<div class="black-background" id="js-black-bg"></div>
 			</div>
 
+		</form>
+		<div class="btn-center">
+			<button type="submit" id="js-show-popup"
+				class="btn btn-danger mt-5 fb-tag btn-conf">出品する</button>
 		</div>
-	</form>
+	</div>
 	<div class="clear-box"></div>
+
+
+
 	<jsp:include page="/WEB-INF/jsp/footer.jsp" />
+
+	<script type="text/javascript" src="/m_market/js/jquery-3.5.1.min.js"></script>
 	<script type="text/javascript" src="/m_market/js/drag_and_drop.js"></script>
+	<script type="text/javascript">
+		function mouseClick() {
+			document.getElementById('fileInput').click();
+		}
+
+		var elem = document.getElementById('fileInput');
+		elem.onchange = function() {
+			let myicon = document.getElementById('myicon');
+			let mytext = document.getElementById('mytext');
+			if(elem.value){
+				myicon.className = '';
+				mytext.className = '';
+				myicon.innerHTML = '<i id="myicon" class="mt-5 mb-3 fas fa-check fa-2x" style="color: black"></i>';
+				mytext.innerHTML = '<p id="mytext" class="mb-5" style="font-size: 13px">ファイルが選択されました.</p>';
+			}else{
+				myicon.innerHTML = '<i id="myicon" class="mt-5 mb-3 fas fa-camera fa-2x" style="color: black"></i>';
+				mytext.innerHTML = '<p id="mytext" class="mb-5" style="font-size: 13px">クリックしてファイルをアップロード!</p>';
+			}
+		}
+	</script>
 </body>
 </html>

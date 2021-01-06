@@ -93,6 +93,12 @@
 	color: #808080;
 	cursor: pointer;
 }
+
+.drop_area:hover {
+	border: 2px dashed rgb(70, 130, 180);
+	margin: -2px;
+}
+
 .fb-tag {
 	font-weight: bold;
 }
@@ -109,6 +115,7 @@ textarea {
 	font-size: 14px;
 	padding: 20px;
 }
+
 .select-widthmax {
 	width: 100%;
 	font-size: 15px;
@@ -116,15 +123,17 @@ textarea {
 }
 
 .price-flex {
-	width : 100%;
+	width: 100%;
 	font-size: 15px;
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
 }
+
 .price-flex p {
 	width: 50%;
 }
+
 .price-flex input {
 	width: 90%;
 	padding: 13px;
@@ -133,10 +142,78 @@ textarea {
 .btn-center {
 	text-align: center;
 }
-.btn-conf{
+
+.btn-conf {
 	font-size: 17px;
 	width: 50%;
 	padding: 13px;
+}
+
+.popup {
+	position: fixed;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 9999;
+	opacity: 0;
+	visibility: hidden;
+	transition: .6s;
+}
+
+.popup.is-show {
+	opacity: 1;
+	visibility: visible;
+}
+
+.popup-inner {
+	text-align: center; position : absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+	width: 80%;
+	max-width: 600px;
+	padding: 50px;
+	background-color: #fff;
+	z-index: 2;
+	position: absolute;
+}
+
+.popup-inner p {
+	margin-top : 20px;
+	font-weight: bold;
+}
+
+.popup-inner img {
+	text-align: center;
+	width: 80%;
+}
+
+.close-btn {
+	position: absolute;
+	right: 0;
+	top: 0;
+	width: 50px;
+	height: 50px;
+	line-height: 50px;
+	text-align: center;
+	cursor: pointer;
+}
+
+.close-btn i {
+	font-size: 20px;
+	color: #333;
+}
+
+.black-background {
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, .8);
+	z-index: 1;
+	cursor: pointer;
 }
 
 /* --- マイページ --- */
