@@ -53,7 +53,7 @@
 		<div class="col-md-1 cart-wthree">
 			<div class="cart">
 				<form action="/m_market/LoginCheck" method="get" class="last">
-					<button class="w3view-cart" type="submit" name="file_name" value="mypage">
+					<button class="w3view-cart" type="submit" name="file_name" value="sell">
 						<i class="fa fa-handshake" aria-hidden="true"></i>
 					</button>
 				</form>
