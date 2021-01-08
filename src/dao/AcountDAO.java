@@ -34,7 +34,7 @@ public class AcountDAO {
 		// DB接続
 		try (Connection conn = DriverManager.getConnection(JDBC_URL, DB_USER, DB_PASS)) {
 			// SELECT文作成
-			String sql = "INSERT INTO acount (name, email, password, firstname, lastname, furigana_fn, furigana_ln, birthday) VALUES(?,?,?,?,?,?,?,?)";
+			String sql = "INSERT INTO acount (id,name, email, password, firstname, lastname, furigana_fn, furigana_ln, birthday) VALUES(seq.NEXTVAL,?,?,?,?,?,?,?,?)";
 			// 事前にコンパイルし、プリペアドステートメントに変換
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 			pStmt.setString(1, acountName);

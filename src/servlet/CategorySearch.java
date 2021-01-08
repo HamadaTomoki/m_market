@@ -35,7 +35,6 @@ public class CategorySearch extends HttpServlet {
 
 		request.setCharacterEncoding("UTF-8");
 		String category = request.getParameter("category");
-		System.out.println(category);
 		if (category != null) {
 			// リクエストスコープに商品一覧を保存
 			request.setAttribute("prdList", prdDAO.findCategory(category));

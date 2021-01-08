@@ -65,16 +65,26 @@
 							<div
 								class="col-md-4 women-grids wp<c:out value="col.count" /> animated wow slideInUp"
 								data-wow-delay=".5s">
-								<a href="single.html"><div class="product-img">
+								<div class="product-img">
 										<img src="images/<c:out value="${item.getImg()}" />.<c:out value="${item.getExt() }" />" alt="" />
 										<div class="p-mask">
-											<form action="#" method="post">
+											<form action="./detail.jsp" method="post">
+											    <input type="hidden" name="name" value="<c:out value="${item.getName()}" />">
+											    <input type="hidden" name="explain" value="<c:out value="${item.getExplain()}" />">
+											    <input type="hidden" name="price" value="<c:out value="${item.getPrice()}" />">
+											    <input type="hidden" name="category" value="<c:out value="${item.getCategory()}" />">
+											    <input type="hidden" name="condition" value="<c:out value="${item.getCondition()}" />">
+											    <input type="hidden" name="img" value="<c:out value="${item.getImg()}" />">
+											    <input type="hidden" name="ext" value="<c:out value="${item.getExt()}" />">
+											    <input type="hidden" name="fee" value="<c:out value="${item.getFee()}" />">
+											    <input type="hidden" name="location" value="<c:out value="${item.getLocation()}" />">
+											    <input type="hidden" name="day" value="<c:out value="${item.getDay()}" />">
 												<button type="submit" class="w3ls-cart pw3ls-cart">
 													<i class="fa fa-shopping-bag" aria-hidden="true"></i>購入
 												</button>
 											</form>
 										</div>
-									</div></a>
+									</div>
 								<h4><c:out value="${item.getName()}" /></h4>
 								<h5><c:out value="${item.getPrice()}" />円</h5>
 							</div>

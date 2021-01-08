@@ -18,6 +18,13 @@ public class Product {
 		this.day = day;
 	}
 
+	public Product(String name, int price, String img, String ext) {
+		this.name = name;
+		this.price = price;
+		this.img = img;
+		this.ext = ext;
+	}
+
 	public Product(String category) {
 		this.category = category;
 	}

@@ -22,7 +22,7 @@
 	<!-- ログイン完了メッセージ -->
 	<div class="rectagle-shadow">
 		<p class="register-success mt-5 mb-5 text-center">
-			<span><i class="fas fa-check"></i></span> 出品が完了しました!
+			<span><i class="fas fa-check"></i></span> 購入が完了しました！
 		</p>
 	</div>
 	<div class="clear-box"></div>

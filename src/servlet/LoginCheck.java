@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import model.AcountLoginInfo;
+import model.Product;
 
 @WebServlet("/LoginCheck")
 public class LoginCheck extends HttpServlet {
@@ -26,6 +27,15 @@ public class LoginCheck extends HttpServlet {
 
 		HttpSession session = request.getSession();
 		AcountLoginInfo ali = (AcountLoginInfo) session.getAttribute("acountLoginInfo");
+
+		if (fileName.equals("purchase")) {
+			String name = request.getParameter("name");
+			String strPrice = request.getParameter("price");
+			int price = Integer.parseInt(strPrice);
+			String img = request.getParameter("img");
+			String ext = request.getParameter("ext");
+			request.setAttribute("prd", new Product(name,price,img,ext));
+		}
 
 		if (ali == null) {
 			response.sendRedirect("/m_market/login.jsp");

@@ -59,7 +59,7 @@ public class AcountRegister extends HttpServlet {
 		actDAO.registerAcount(acountInfo);
 
 		// リダイレクト
-		response.sendRedirect("/m_market/registraction_successful.jsp");
+		response.sendRedirect("/m_market/registration_successful.jsp");
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
